@@ -13,8 +13,11 @@ jobs:
 
     steps:
       - name: GitHub env information
-        run: echo ${{ toJson(github.event)}} | jq .
+        env:
+          EVENT_JSON: ${{ toJSON(github.event) }}
+        run: echo "$EVENT_JSON" | jq .
         shell: bash
+
       - name: Show issue information
         run: |
           echo "ISSUE NUMBER = ${{ github.event.issue.number }}"
