@@ -17,6 +17,11 @@ jobs:
           echo "ISSUE NUMBER = ${{ github.event.issue.number }}"
           echo "ISSUE URL = ${{ github.event.issue.html_url }}"
 
+      - name: Show issue number
+        run: |
+          echo "Issue number = ${{ github.event.issue.number }}"
+          echo "Issue title = ${{ github.event.issue.title }}"
+
       - name: Create comment
         uses: peter-evans/create-or-update-comment@v5
         with:
