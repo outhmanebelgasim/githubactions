@@ -13,7 +13,7 @@ jobs:
 
     steps:
       - name: GitHub env information
-        run: echo ${{ github.event }}
+        run: echo ${{ toJson(github.event)}} | jq .
         shell: bash
       - name: Show issue information
         run: |
