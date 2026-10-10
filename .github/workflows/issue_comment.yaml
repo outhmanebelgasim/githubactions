@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: GitHub env information
+        run: echo ${{ github.event }}
+        shell: bash
       - name: Show issue information
         run: |
           echo "ISSUE NUMBER = ${{ github.event.issue.number }}"
