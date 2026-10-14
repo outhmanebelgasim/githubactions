@@ -6,8 +6,8 @@
 
 # Any changes to web/ and recursively all the files and subdirectories will
 # require a code owner review.
-web/**    link-ghost
+web/**    @outhmanebelgasim
 
 # Any changes to infra/ and recursively all the files and subdirectories will
 # require a code owner review.
-infra/**  link-
+infra/**  @outhmanebelgasim

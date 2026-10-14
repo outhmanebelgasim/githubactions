@@ -1,56 +1,52 @@
-name: Continuous Integration Workflow
+name: Continous integration Workflow 
 
-# This workflow is triggered whenever a new PR is created on the main branch
-on:
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'web/**'
-  push:
-    branches:
-      - main
-    paths:
-      - 'web/**'
+on: 
+    pull_request: 
+        branches: main
 
-jobs:
-
-  # Run unit tests to make sure everything is 👍
-  test:
-    name: 'Run unit tests'
-    defaults:
-      run:
+defaults: 
+    run:
         shell: bash
-        # Define the working directory for all run steps in the workflow
         working-directory: ./web
-    # Specify the OS we want the workflow to run on
-    runs-on: ubuntu-latest
-    # Define the steps for this job
-    steps:
-    - uses: actions/checkout@v2
-      name: 'Checkout repository'
 
-    - name: 'Install Dependencies'
-      run: npm install
+jobs: 
+    test: 
+        name: "Run unit tests"
+        runs-on: ubuntu-latest
+        steps: 
+            - name: "checkout repository"
+              uses: actions/checkout@v7
+              
+            
+            - name: 'Install dependencies'
+              run: npm install 
+            
+            - name: 'Run tests'
+              run: npm run test
     
-    - name: 'Run Tests'
-      run: npm run test
+    lint: 
+        name: "Run linter"
+        runs-on: ubuntu-latest
+        steps: 
+            - name: "Checkout repository"
+              uses: actions/checkout@v7
+            
+            - name: "install dependencies"
+              run: npm install 
 
-  # Run the linter to check for code style issues
-  lint:
-    name: 'Run linter'
-    defaults:
-      run:
-        shell: bash
-        # Define the working directory for all run steps in the workflow
-        working-directory: ./web
-    runs-on: ubuntu-latest
-    steps:    
-    - uses: actions/checkout@v2
-      name: 'Checkout repository'
-    
-    - name: 'Install Dependencies'
-      run: npm install
+            - name: "Run Linter" 
+              run: npx standard -v
 
-    - name: 'Run Linter'
-      run: npx standard -v
+    # deploy: 
+    #     environment: staging
+    #     name: "Deploy to staging"
+    #     runs-on: ubuntu-latest
+    #     # we need for each pull request a new staging env, we will handle this with terraform
+    #     needs: ['test', lint]
+
+    #     steps:
+    #         - name: "Checkout repository"
+    #           uses: actions/checkout@v7
+
+    #         - name: 
+

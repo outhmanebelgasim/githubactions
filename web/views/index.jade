@@ -1,5 +1,18 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title} young padawan 
+  main.project
+    header
+      p.eyebrow Node.js / Express
+      h1= title
+      p.intro= description
+    section(aria-labelledby='endpoints-heading')
+      h2#endpoints-heading Explore the application
+      p Use these endpoints to try the application and verify its responses.
+      ul.endpoints
+        li
+          a(href='/ice-flakes') View ice flakes
+          code GET /ice-flakes
+        li
+          a(href='/users/users') View users
+          code GET /users/users

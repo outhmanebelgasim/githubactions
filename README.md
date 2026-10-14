@@ -1,14 +1,9 @@
-# Intro to CI/CD 💻 ☁️
+# CI/CD Intro
 
-> TLDR; This repository is a sample project demonstrating a basic continuous integration (CI) / continuous deployment (CD) setup. This project is in READ ONLY mode.
+A Node.js/Express project for practising automated tests and continuous delivery,
+with Packer and Terraform examples for staging and production environments.
 
-:warning: **Fork this repository in order to use it!** If you're following along the videos and trying to run the workflows here, they will not work.
-
-### Course attachement
-
-> This repository is best consumed while or after following the course attachment 👇
-
-<a href="https://www.youtube.com/playlist?list=PLArH6NjfKsUhvGHrpag7SuPumMzQRhUKY" target="_blank"><img src="./images/course_banner.png" /></a>
+Maintained by [outhmanebelgasim](https://github.com/outhmanebelgasim).
 
 ## Project structure
 
@@ -64,33 +59,51 @@
 
 ## Setup
 
-### Configure your GitHub repository to run the workflows
+### Run locally
 
-<details>
-    <summary>Click to expand</summary>
+With Node.js 16 or newer:
 
-1. Navigate to the `Settings` in your repository then to `Environments`
-    ![37EE1AFF-BDBC-405E-8D43-672E09CA87D5](https://user-images.githubusercontent.com/568794/125194173-86195400-e250-11eb-89dd-e52cdf867c74.png)
+```sh
+cd web
+npm ci
+npm test -- --runInBand
+npm start
+```
 
-1. Add a new environment and call it `staging` (or anything else you like)
-    ![F1BC0A94-3BB5-4409-B057-6E6FC241C78A](https://user-images.githubusercontent.com/568794/125194219-9d584180-e250-11eb-9495-e2a30ddee5c5.png)
+Open `http://localhost:3000`. Use `PORT` to change the listening port.
 
-1. Enable required reviewers and add your secrets
-    ![085BF9C1-552E-46C5-91D0-687A9634A885](https://user-images.githubusercontent.com/568794/125194260-b9f47980-e250-11eb-9e10-c603a3ee8232.png)
+### Existing endpoints
 
-1. Enable branch protection on the `main` branch
-    ![2E8B02F5-CD8E-40C1-B03C-5FD7074C1C77](https://user-images.githubusercontent.com/568794/125194325-15266c00-e251-11eb-9c39-f9b847971dae.png)
-    ![955A1F29-D628-46C4-86A4-8F614A712CFF](https://user-images.githubusercontent.com/568794/125194345-266f7880-e251-11eb-8055-4d0d392b6f2a.png)
+| Method | Path | Status | Response |
+| --- | --- | --- | --- |
+| GET | `/` | 200 | Project home page |
+| GET | `/ice-flakes` | 201 | `{"resource":"ice-flakes","count":1005,"shape":"rectangle"}` |
+| GET | `/users/users` | 200 | `respond with a resource` |
 
-</details>
+Unknown paths return a 404 error page. The users URL includes both the router's
+mount path and its existing route path.
 
-### Test your setup
+### Publish your copy
 
-1. Create a new branch from the `main` branch and make some changes to the app
-1. Push the new branch to GitHub
-1. Watch the CI workflow being triggered
-1. Troubleshoot issues as they rise
+Create an empty `ci-cd-intro` repository under your GitHub account. From the
+project root, point the local remote at your repository before pushing:
 
-## LICENSE
+```sh
+git remote set-url origin https://github.com/outhmanebelgasim/ci-cd-intro.git
+git remote -v
+```
 
-[Copyright (c) 2021 Bassem Dghaidi (@Link-)](LICENSE)
+If your GitHub username or repository name differs, update this URL, `CODEOWNERS`,
+and the project metadata in `web/package.json`. Commit your changes and push to
+your repository.
+
+Configure your repository's CI/CD workflows under `.github/workflows/`. Run the
+application's installation and test commands from the `web/` directory.
+See [the infrastructure guide](infra/README.md) for the existing AWS examples.
+
+## License and attribution
+
+This version is based on [Link-/ci-cd-intro](https://github.com/Link-/ci-cd-intro)
+by Bassem Dghaidi (@Link-). The original [MIT license](LICENSE), including its
+copyright notice, is retained. Publishing your own copy does not remove the
+original author's attribution.

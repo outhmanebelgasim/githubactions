@@ -1,6 +1,18 @@
 {
-  "name": "nimble-ice",
+  "name": "ci-cd-intro",
   "version": "0.0.1",
+  "description": "An Express application for practising automated testing and continuous delivery.",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "outhmanebelgasim",
+      "url": "https://github.com/outhmanebelgasim"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/outhmanebelgasim/ci-cd-intro.git"
+  },
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
