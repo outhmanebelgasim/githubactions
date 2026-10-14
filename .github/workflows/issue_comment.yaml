@@ -1,0 +1,41 @@
+name: Create a comment on new issues
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  issues: write
+
+jobs:
+  comment-with-action:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: GitHub env information
+        env:
+          EVENT_JSON: ${{ toJSON(github.event) }}
+        run: echo "$EVENT_JSON" | jq .
+        shell: bash
+
+      - name: Show issue information
+        run: |
+          echo "ISSUE NUMBER = ${{ github.event.issue.number }}"
+          echo "ISSUE URL = ${{ github.event.issue.html_url }}"
+
+      - name: Show issue number
+        run: |
+          echo "Issue number = ${{ github.event.issue.number }}"
+          echo "Issue title = ${{ github.event.issue.title }}"
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v5
+        with:
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            This is a multi-line test comment
+            - With GitHub **Markdown** :sparkles:
+            - Created by [create-or-update-comment][1]
+
+            [1]: https://github.com/peter-evans/create-or-update-comment
+          reactions: '+1'
